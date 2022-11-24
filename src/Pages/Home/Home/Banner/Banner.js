@@ -3,7 +3,7 @@ import banner from "../../../../assets/banner1.jpg";
 
 const Banner = () => {
   return (
-    <div>
+    <div className="mt-5">
       <div className="hero" style={{ backgroundImage: `url(${banner})` }}>
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-center text-neutral-content">
