@@ -4,6 +4,7 @@ import Blogs from '../../Pages/Blogs/Blogs';
 import ErrorPage from '../../Pages/ErrorPage/ErrorPage';
 import AllBrand from '../../Pages/Home/AllBrands/AllBrand';
 import Home from '../../Pages/Home/Home/Home';
+import IndividualBrands from '../../Pages/IndividualBrands/IndividualBrands';
 import Login from '../../Pages/Login/Login';
 
 const router = createBrowserRouter([
@@ -21,6 +22,11 @@ const router = createBrowserRouter([
             {
                 path: '/allbrand',
                 element: <AllBrand></AllBrand>,
+            },
+            {
+                path: '/allbrand/:brands_id',
+                element: <IndividualBrands></IndividualBrands>,
+                loader: ({params}) => fetch(`http://localhost:5000/brandsCollection/${params.brands_id}`) ,
             },
             {
                 path: '/login',
