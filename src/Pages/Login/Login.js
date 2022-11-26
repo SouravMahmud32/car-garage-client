@@ -72,7 +72,7 @@ const Login = () => {
             }
           </div>
         </form>
-        <p>New to Doctors Portal? <Link className="text-primary" to='/register'>Create a new account</Link></p>
+        <p>New to Car Garage? <Link className="text-primary" to='/register'>Create a new account</Link></p>
         <div className="divider">OR</div>
         <button onClick={handleGoogleSignIn} className="btn btn-outline btn-primary w-full">CONTINUE WITH GOOGLE</button>
       </div>
