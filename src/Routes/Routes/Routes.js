@@ -6,6 +6,7 @@ import AllBrand from '../../Pages/Home/AllBrands/AllBrand';
 import Home from '../../Pages/Home/Home/Home';
 import IndividualBrands from '../../Pages/IndividualBrands/IndividualBrands';
 import Login from '../../Pages/Login/Login';
+import Register from '../../Pages/Register/Register';
 
 const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login></Login>
+            },
+            {
+                path: '/register',
+                element: <Register></Register>
             },
             {
                 path: '/blogs',

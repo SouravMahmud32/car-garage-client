@@ -1,15 +1,39 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const [loginError, setLoginError] = useState('');
+  const {logIn, providerLogin} = useContext(AuthContext);
+  const [loginError, setLoginError] = useState('');
+  const [loginUserEmail, setLoginUserEmail] = useState('');
 
-    const handleLogin = data => {
-        console.log(data);
-        setLoginError('');
-    }
+  const handleLogin = data =>{
+    console.log(data);
+    setLoginError('');
+    logIn(data.email, data.password)
+    .then(result => {
+        const user = result.user;
+        console.log(user);
+        setLoginUserEmail(data.email);
+    })
+    .catch(error => {
+        console.error(error.message)
+        setLoginError(error.message);
+    })
+  }
+
+  const handleGoogleSignIn = () => {
+    providerLogin()
+    .then(result =>{
+        const user = result.user;
+        console.log(user);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+  };
     
     return (
         <div className="h-[800px] flex justify-center items-center">
@@ -50,7 +74,7 @@ const Login = () => {
         </form>
         <p>New to Doctors Portal? <Link className="text-primary" to='/register'>Create a new account</Link></p>
         <div className="divider">OR</div>
-        <button className="btn btn-outline btn-primary w-full">CONTINUE WITH GOOGLE</button>
+        <button onClick={handleGoogleSignIn} className="btn btn-outline btn-primary w-full">CONTINUE WITH GOOGLE</button>
       </div>
     </div>
     );
