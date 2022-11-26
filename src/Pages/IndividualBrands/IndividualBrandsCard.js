@@ -1,7 +1,9 @@
+import { format } from 'date-fns';
 import React from 'react';
 
-const IndividualBrandsCard = ({brand}) => {
+const IndividualBrandsCard = ({brand, setBooking, selectedDate}) => {
     const {title, image, name, location, resale, price, used} = brand;
+    const date = format(selectedDate, 'PP');
     return (
         <div className='p-4'>
             <div className="card card-compact w-full bg-base-100 shadow-xl">
@@ -9,12 +11,13 @@ const IndividualBrandsCard = ({brand}) => {
   <div className="card-body items-center">
     <h2 className="card-title">Model: {title}</h2>
     <p>Seller: {name}</p>
+    <p><small>Posted: {date}</small></p>
     <p>Market Price: ${price}</p>
     <p>Asking Price: <strong>${resale}</strong></p>
     <p>Used: {used}</p>
     <span>Location: {location}</span>
     <div className="card-actions ">
-      <button className="btn btn-primary">Book Now</button>
+      <label htmlFor="booking-modal" className="btn btn-primary" onClick={() => setBooking(brand)}>Book Now</label>
     </div>
   </div>
 </div>
