@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { FaArrowCircleLeft, FaArrowLeft } from "react-icons/fa";
 import { FaTruckMonster } from "react-icons/fa";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
@@ -56,14 +57,13 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-            {
-                user?.uid ?
+              {user?.uid ? (
                 <>
-                <Link>Dashboard</Link>
+                  <Link to="/dashboard">Dashboard</Link>
                 </>
-                :
+              ) : (
                 <></>
-            }
+              )}
             </li>
             <li>
               <Link to="/blogs">Blogs</Link>
@@ -71,6 +71,10 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
+          <label htmlFor="dashboard-drawer">
+            {" "}
+            <FaArrowCircleLeft className="text-2xl mr-2 lg:hidden"></FaArrowCircleLeft>
+          </label>
           {user?.uid ? (
             <>
               <span></span>
