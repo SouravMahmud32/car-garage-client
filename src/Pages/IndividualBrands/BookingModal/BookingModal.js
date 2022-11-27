@@ -1,9 +1,11 @@
 import { format } from "date-fns";
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../contexts/AuthProvider";
 
 const BookingModal = ({booking, selectedDate, setBooking}) => {
     const {title, resale} = booking;
     const date = format(selectedDate, 'PP');
+    const {user} = useContext(AuthContext);
 
     const handleBooking = event =>{
         event.preventDefault();
@@ -57,7 +59,7 @@ const BookingModal = ({booking, selectedDate, setBooking}) => {
             <input
               name="name"
               type="text"
-            //   defaultValue={user?.displayName}
+              defaultValue={user?.displayName}
               disabled
               placeholder="Your Name"
               className="input w-full input-bordered"
@@ -65,7 +67,7 @@ const BookingModal = ({booking, selectedDate, setBooking}) => {
             <input
               name="email"
               type="email"
-            //   defaultValue={user?.email}
+              defaultValue={user?.email}
               disabled
               placeholder="Email Address"
               className="input w-full input-bordered"
