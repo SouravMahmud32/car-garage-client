@@ -1,34 +1,52 @@
 import { format } from "date-fns";
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
-const BookingModal = ({booking, selectedDate, setBooking}) => {
-    const {title, resale} = booking;
-    const date = format(selectedDate, 'PP');
-    const {user} = useContext(AuthContext);
+const BookingModal = ({ booking, selectedDate, setBooking }) => {
+  const { title, resale } = booking;
+  const date = format(selectedDate, "PP");
+  const { user } = useContext(AuthContext);
 
-    const handleBooking = event =>{
-        event.preventDefault();
-        const form = event.target;
-        const name = form.name.value;
-        const email = form.email.value;
-        const price = form.price.value;
-        const phone = form.phone.value;
-        const meeting = form.meeting.value;
+  const handleBooking = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const price = form.price.value;
+    const phone = form.phone.value;
+    const meeting = form.meeting.value;
 
-        const booking = {
-            booking: title,
-            name,
-            bookingDate: date,
-            email,
-            price,
-            phone,
-            meeting
+    const booking = {
+      booking: title,
+      name,
+      bookingDate: date,
+      email,
+      price,
+      phone,
+      meeting,
+    };
+
+    fetch("http://localhost:5000/bookings", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(booking),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          setBooking(null);
+          toast.success("Booking Confirmed");
+        } else {
+          toast.error(data.message);
         }
+      });
 
-        console.log(booking);
-        setBooking(null);
-    }
+    setBooking(null);
+  };
 
   return (
     <>
@@ -42,7 +60,10 @@ const BookingModal = ({booking, selectedDate, setBooking}) => {
             ✕
           </label>
           <h3 className="text-lg font-bold">{title}</h3>
-          <form onSubmit={handleBooking} className="grid grid-cols-1 gap-3 mt-10">
+          <form
+            onSubmit={handleBooking}
+            className="grid grid-cols-1 gap-3 mt-10"
+          >
             <input
               type="text"
               disabled

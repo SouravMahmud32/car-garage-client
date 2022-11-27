@@ -1,9 +1,19 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import Loading from '../../Shared/Loading/Loading';
 import BrandsCard from './BrandsCard';
 
 const AllBrand = () => {
-    const allBrands = useLoaderData();
+    const {data: allBrands = [], isLoading} = useQuery({
+        queryKey: ['brandsCollection'],
+        queryFn: async() => await fetch('http://localhost:5000/brandsCollection')
+        .then(async(res) => await res.json())
+      });
+
+      if(isLoading){
+        return <Loading></Loading>
+      }
+
     return (
         <div className='mt-20'>
             <h2 className="text-4xl pb-2 font-bold text-white">Brands</h2>
