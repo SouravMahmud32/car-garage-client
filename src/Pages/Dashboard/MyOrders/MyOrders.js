@@ -4,18 +4,18 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const MyOrders = () => {
-    const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
-    const url = `http://localhost:5000/bookings?email=${user?.email}`;
+  const url = `https://y-lovat-alpha.vercel.app/bookings?email=${user?.email}`;
 
-    const { data: bookings = [] } = useQuery({
-        queryKey: ['bookings', user?.email],
-        queryFn: async () => {
-            const res = await fetch(url);
-            const data = await res.json();
-            return data;
-        }
-    })
+  const { data: bookings = [] } = useQuery({
+    queryKey: ["bookings", user?.email],
+    queryFn: async () => {
+      const res = await fetch(url);
+      const data = await res.json();
+      return data;
+    },
+  });
 
   return (
     <div>
@@ -42,7 +42,6 @@ const MyOrders = () => {
                     <td>{booking.booking}</td>
                     <td>{booking.bookingDate}</td>
                     <td>{booking.price}</td>
-                    
                   </tr>
                 ))}
             </tbody>

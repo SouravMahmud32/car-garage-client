@@ -27,7 +27,7 @@ const BookingModal = ({ booking, selectedDate, setBooking }) => {
       meeting,
     };
 
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://y-lovat-alpha.vercel.app/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",
