@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import axios from 'axios';
+import useToken from "../../hooks/useToken";
 
 const Register = () => {
   const {
@@ -13,7 +14,13 @@ const Register = () => {
   } = useForm();
   const { providerLogin, createUser, updateUser } = useContext(AuthContext);
   const [registerError, setRegisterError] = useState("");
+  const [createdUserEmail, setcreatedUserEmail] = useState('');
+  const [token] = useToken(createdUserEmail);
   const navigate = useNavigate();
+
+  if(token){
+    navigate('/');
+  }
 
   const handleRegister = (data) => {
     console.log(data);
@@ -22,6 +29,8 @@ const Register = () => {
     axios.post('http://localhost:5000/users', rest)
     .then(res => console.log(res))
     .catch(error => console.error(error))
+
+    setcreatedUserEmail(rest.email)
 
     createUser(data.email, data.password)
       .then((result) => {
