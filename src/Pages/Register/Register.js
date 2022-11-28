@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
+import axios from 'axios';
 
 const Register = () => {
   const {
@@ -15,7 +16,13 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleRegister = (data) => {
+    console.log(data);
+    const {password, ...rest} = data;
     setRegisterError("");
+    axios.post('http://localhost:5000/users', rest)
+    .then(res => console.log(res))
+    .catch(error => console.error(error))
+
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
@@ -67,8 +74,8 @@ const Register = () => {
               <option disabled selected>
                 Register as
               </option>
-              <option>User</option>
-              <option>Seller</option>
+              <option value={'buyer'}>Buyer</option>
+              <option value={'seller'}>Seller</option>
             </select>
           </div>
           <div className="form-control w-full max-w-xs">

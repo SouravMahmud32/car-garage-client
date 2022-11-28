@@ -16,7 +16,7 @@ const AllBrand = () => {
 
     return (
         <div className='mt-20'>
-            <h2 className="text-4xl pb-2 font-bold text-white">Brands</h2>
+            <h2 className="text-4xl pb-2 text-center font-bold text-white">Brands</h2>
             <div className='grid grid-cols-3'>
             {
                 allBrands.map(brand => <BrandsCard

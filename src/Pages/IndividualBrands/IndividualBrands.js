@@ -10,7 +10,7 @@ const IndividualBrands = () => {
 
     return (
         <div className='p-20'>
-            <h2 className="text-4xl pb-3 font-bold text-white">Book Your Dream Car at Beat Deal!</h2>
+            <h2 className="text-4xl text-center pb-3 font-bold text-white">Book Your Dream Car at Beat Deal!</h2>
             <div className='grid sm:grid-cols-1 lg:grid-cols-2'>
             {
                 individualAllBrands.map(brand => <IndividualBrandsCard

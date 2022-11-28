@@ -4,7 +4,7 @@ import about from "../../../assets/about.jpg";
 const About = () => {
   return (
     <div className="mt-20">
-      <h2 className="text-4xl pb-2 font-bold text-white">About Us</h2>
+      <h2 className="text-4xl pb-2 font-bold text-center text-white">About Us</h2>
       <div className="hero bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img src={about} alt="" />
