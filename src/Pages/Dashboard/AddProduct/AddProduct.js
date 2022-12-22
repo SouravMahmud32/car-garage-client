@@ -50,7 +50,7 @@ const AddProduct = () => {
             .then((result) => {
               console.log(result);
               toast.success(`${data.name} is added successfully`);
-              navigate("/advirtise");
+              navigate("/myproducts");
             });
         }
       });
